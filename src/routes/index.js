@@ -3,6 +3,8 @@ import DashboardPage from "../pages/dashboard.jsx";
 import HomePage from "../pages/home.jsx";
 import RegisterPage from "../pages/register.jsx";
 
+
+
 export const publicRoutes = [
 {
     path: "/",
