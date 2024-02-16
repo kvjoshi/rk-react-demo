@@ -35,9 +35,6 @@ function App() {
     </Routes>)
  return (
     <>
-
-    <div><button className='btn btn-primary' onClick={()=>{setIsLoggedIn(!isLoggedIn)}}>toggle login state</button></div>
-
     <BrowserRouter basename={'/'}>
         {isLoggedIn ?(
       <AdminLayout>
