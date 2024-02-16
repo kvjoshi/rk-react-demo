@@ -5,6 +5,7 @@ import AuthLayout from "./layout/authLayout.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter , Routes, Route} from "react-router-dom";
 import {privateRoutes , publicRoutes} from "./routes/index.js";
+import axios from 'axios'
 
 function App() {
  const [isLoggedIn, setIsLoggedIn] = useState(false)
@@ -12,6 +13,12 @@ function App() {
     useEffect(() => {
         console.log('isLoggedIn:', isLoggedIn)
     }, [isLoggedIn])
+
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/posts')
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }, []);
 
     const Private = (<Routes>
         {privateRoutes.map((route, index) => {
