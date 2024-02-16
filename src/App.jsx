@@ -4,7 +4,7 @@ import AdminLayout from "./layout/adminLayout.jsx";
 import AuthLayout from "./layout/authLayout.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter , Routes, Route} from "react-router-dom";
-import {privateRoutes , publicRoutes} from "./routes/index.js";
+import {privateRoutes , publicRoutes} from "./routes/index.jsx";
 import axios from 'axios'
 
 function App() {

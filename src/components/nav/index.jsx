@@ -1,5 +1,5 @@
 import {Navbar, Nav} from "react-bootstrap";
-import {publicRoutes , privateRoutes} from "../../routes/index.js";
+import {publicRoutes , privateRoutes} from "../../routes/index.jsx";
 import {Link} from 'react-router-dom'
 export default function NavBarComp() {
     return (
