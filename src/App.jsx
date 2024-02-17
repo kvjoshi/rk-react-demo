@@ -6,19 +6,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter , Routes, Route} from "react-router-dom";
 import {privateRoutes , publicRoutes} from "./routes/index.jsx";
 import axios from 'axios'
+import userStore from "./store/loginStore.js";
 
 function App() {
  const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const {loginState} = userStore()
 
     useEffect(() => {
         console.log('isLoggedIn:', isLoggedIn)
     }, [isLoggedIn])
 
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/posts')
-        .then(res => console.log(res))
-        .catch(err => console.log(err))
-    }, []);
+        console.log('loginState:', loginState)
+    }, [loginState]);
 
     const Private = (<Routes>
         {privateRoutes.map((route, index) => {

@@ -1,20 +1,24 @@
 import React from "react";
 import {Card, CardBody} from "react-bootstrap";
-import {userStore} from "../store/userStore";
+import userStore from "../store/loginStore.js";
 import axios from "axios";
 
 export default function LoginPage() {
-    const {loginData}=userStore()
+    const {loginData,setLoginState}=userStore()
     const [uname, setUname] = React.useState('')
     const [password, setPassword] = React.useState('')
 
     const handleLogin = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:5000/api/login', {
-            uname: uname,
+        axios.post('http://localhost:3001/api/auth/login', {
+            email: uname,
             password: password
         }).then((response) => {
-            loginData(response.data)
+            if (response.status===200){
+                console.log(response.data)
+                loginData(response.data)
+                setLoginState(true)
+            }
         }).catch((error) => {
             console.log(error)
         })
