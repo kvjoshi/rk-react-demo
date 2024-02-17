@@ -8,6 +8,7 @@
 - Protected routes (Covered)
 - Error handling (Covered)
 - Loading states (Covered)
+- Custom hooks (Covered)
 
 
 - Designing (TODO)

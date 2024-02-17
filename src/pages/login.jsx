@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {Card, CardBody} from "react-bootstrap";
 import {useLogin} from "../hooks/loginHook.jsx";
+import useAxios from "axios-hooks";
 
 export default function LoginPage() {
     const [uname, setUname] = React.useState('')
@@ -9,9 +10,22 @@ export default function LoginPage() {
 
     const {loginHook} = useLogin();
 
+    const [{data, loading, error}, refetch] = useAxios("http://localhost:3001/api/auth/login", {manual: true});
 
     const handleLogin = (e) => {
         e.preventDefault();
+        // If the username or password is empty, set the error state to true and display an error message
+        if (uname === '' || password === '') {
+            setApiError({error: true, message: 'Username or password cannot be empty'})
+            return
+        }
+        // Using Axios Hooks to make a POST request to the login endpoint
+
+        // refetch({method: 'POST', data: {uname, password}}).then(r => {
+        //     console.log(r)
+        // });
+
+        // Call the loginHook custom hook and pass the username and password as arguments
         loginHook(uname, password).then(r => {
             console.log(r)
         });
