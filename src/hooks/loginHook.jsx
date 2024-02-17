@@ -3,13 +3,26 @@ import axios from 'axios';
 import userStore from "../store/loginStore.js";
 
 export const useLogin = () => {
-    const {loginState, setLoginState, userDetails , loginData} = userStore();
+    const { setLoginState,  loginData} = userStore();
 
-
-
+    const loginHook = async (email, password) => {
+        try {
+            const response = await axios.post('http://localhost:3001/api/auth/login', {
+                email,
+                password,
+            });
+            if (response.status === 200) {
+                loginData(response.data);
+                setLoginState(true);
+                return response;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const login = async (email, password) => {
         try {
-        const response = await axios.post('http://localhost:3001/login', {
+        const response = await axios.post('http://localhost:3001/api/auth/login', {
             email,
             password,
         });
@@ -18,5 +31,5 @@ export const useLogin = () => {
         console.log(error);
         }
     };
-    return { login };
+    return { login , loginHook};
 }

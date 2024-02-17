@@ -1,33 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Card, CardBody} from "react-bootstrap";
-import userStore from "../store/loginStore.js";
-import axios from "axios";
+import {useLogin} from "../hooks/loginHook.jsx";
 
 export default function LoginPage() {
-    const {loginData,setLoginState}=userStore()
     const [uname, setUname] = React.useState('')
     const [password, setPassword] = React.useState('')
     const [apiError, setApiError] = React.useState({error: false, message: ''})
+
+    const {loginHook} = useLogin();
+
+
     const handleLogin = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:3001/api/auth/login', {
-            email: uname,
-            password: password
-        }).then((response) => {
-            if (response.status===200){
-                console.log(response.data)
-                loginData(response.data)
-                setLoginState(true)
-            }
-        }).catch((error) => {
-            console.log(error)
-            setApiError({error: true, message: error.response.data.message, status: error.response.status});
-        })
+        loginHook(uname, password).then(r => {
+            console.log(r)
+        });
     }
     return (
         <div className="container-lg">
 
             <h1>Login Page</h1>
+            <h2>Loading state</h2>
+            <h2>{loading && loading}</h2>
             <Card>
                 <CardBody className={'shadow-lg border-2 border-black'}>
                     <div>
