@@ -7,7 +7,7 @@ export default function LoginPage() {
     const {loginData,setLoginState}=userStore()
     const [uname, setUname] = React.useState('')
     const [password, setPassword] = React.useState('')
-
+    const [apiError, setApiError] = React.useState({error: false, message: ''})
     const handleLogin = (e) => {
         e.preventDefault();
         axios.post('http://localhost:3001/api/auth/login', {
@@ -21,6 +21,7 @@ export default function LoginPage() {
             }
         }).catch((error) => {
             console.log(error)
+            setApiError({error: true, message: error.response.data.message, status: error.response.status});
         })
     }
     return (
@@ -30,6 +31,9 @@ export default function LoginPage() {
             <Card>
                 <CardBody className={'shadow-lg border-2 border-black'}>
                     <div>
+                        {apiError.error ? <div className="alert alert-danger h-25" role="alert">
+                            {apiError.message}
+                        </div> : ''}
                         <label>Username</label>
                         <input type='text' name='uname' className="form-control" onChange={(e) => {
                             setUname(e.target.value)

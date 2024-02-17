@@ -8,10 +8,7 @@ import {privateRoutes , publicRoutes} from "./routes/index.jsx";
 import userStore from "./store/loginStore.js";
 
 function App() {
- 
     const {loginState} = userStore()
-
-
     useEffect(() => {
         console.log('loginState:', loginState)
     }, [loginState]);
