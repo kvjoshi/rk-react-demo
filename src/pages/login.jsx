@@ -21,7 +21,6 @@ export default function LoginPage() {
 
             <h1>Login Page</h1>
             <h2>Loading state</h2>
-            <h2>{loading && loading}</h2>
             <Card>
                 <CardBody className={'shadow-lg border-2 border-black'}>
                     <div>
